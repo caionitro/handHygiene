@@ -13,7 +13,7 @@
       break;
 
     default:
-      $lista = $rel->getListaIndicaAcao();
-      include_once '../view/relIndicaAcao.php';
+      $lista = $rel->getListaGeral();
+      include_once '../view/relTotal.php';
       break;
   }
