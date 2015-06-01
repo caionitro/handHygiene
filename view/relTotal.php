@@ -17,6 +17,29 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="local" class="col-xs-2 control-label">Local</label>
+        <div class="col-xs-6 input-group">
+          <select name="local" id="local" class="form-control">
+              <option value=""></option>
+            <?php foreach ($local as $key) { ?>
+                <option value="<?=$key['idLocal']?>"><?=$key['local']?></option>
+            <?php } ?>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="setor" class="col-xs-2 control-label">Setor</label>
+        <div class="col-xs-6 input-group">
+          <select name="setor" id="setor" class="form-control"></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="categoria" class="col-xs-2 control-label">Categoria</label>
+        <div class="col-xs-6 input-group">
+          <select name="categoria"></select>
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-sm-offset-6 col-xs-2 text-right">
           <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-filter"></span></button>
         </div>
@@ -28,8 +51,8 @@
       <thead>
         <tr>
           <th>Data</th>
-          <th>Local</th>
           <th>Setor</th>
+          <th>Local</th>
           <th>Categoria</th>
           <th>Ação</th>
           <th>Indicação</th>
@@ -41,8 +64,8 @@
         <?php foreach ($lista as $key => $value) { ?>
           <tr>
             <td><?=$value['dataCadastro']?></td>
-            <td><?=$value['local']?></td>
             <td><?=$value['setor']?></td>
+            <td><?=$value['local']?></td>
             <td><?=$value['categoria']?></td>
             <td><?=$value['acao']?></td>
             <td><?=$value['indicacao']?></td>
@@ -67,6 +90,26 @@
       language: "pt-BR",
       autoclose: true
     });
+
+    $('#local').change(function() {
+        var idLocal = $(this).val();
+        $.ajax({
+            url: '../controller/relatorio.php',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {action: 'getAllSetor', idLocal: idLocal},
+        }).done(function(r) {
+          console.log(r);
+            var option = '<option></option>';
+            $.each(r, function(index, val) {
+                option += '<option value="'+val.idSetor+'">'+val.setor+'</option>';
+            });
+            $('#setor').html(option);
+        }).fail(function() {
+            console.log("error");
+        });
+    });
+
   });
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
