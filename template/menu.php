@@ -24,8 +24,11 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Relatórios <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="../controller/relatorio.php">Geral</a></li>
-            <!-- <li><a href="../controller/relIndicaAcao.php">Indicação x Ação</a></li> -->
+            <li><a href="../controller/relatorioIndicaAcao.php">Indicação x Ação</a></li>
+            <li><a href="../controller/relatorioIndicaHigienizacao.php">Indicação x Higienização</a></li>
+            <li class="divider"></li>
+            <li><a href="../controller/relatorioAnalitico.php">Geral Analítico</a></li>
+            <li><a href="../controller/relatorioSintetico.php">Geral Sintético</a></li>
           </ul>
         </li>
       </ul>

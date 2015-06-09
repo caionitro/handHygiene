@@ -2,26 +2,27 @@
 <?php require_once '../template/menu.php'; ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
 <div class="container">
-    <h3>Relatório Geral</h3>
-    <form class="form-horizontal">
+    <h3>Relatório geral analítico</h3>
+    <form class="form-horizontal" method="POST" action="relatorioAnalitico.php">
+      <input type="hidden" name="action" value="gerar">
       <div class="form-group">
         <label for="dataInicio" class="col-xs-2 control-label">Data Inicio</label>
         <div class="col-xs-6 input-group date">
-          <input type="text" class="form-control" name="dataInicio" id="dataInicio" placeholder="Data Inicio"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          <input type="text" class="form-control" value="<?=$dataInicio?>" name="dataInicio" id="dataInicio" placeholder="Data Inicio"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
         </div>
       </div>
       <div class="form-group">
         <label for="dataFim" class="col-xs-2 control-label">Data Fim</label>
         <div class="col-xs-6 input-group date">
-          <input type="text" class="form-control" id="dataFim" name="dataFim" placeholder="Data Fim"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          <input type="text" class="form-control" value="<?=$dataFim?>" id="dataFim" name="dataFim" placeholder="Data Fim"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
         </div>
       </div>
       <div class="form-group">
         <label for="local" class="col-xs-2 control-label">Local</label>
         <div class="col-xs-6 input-group">
           <select name="local" id="local" class="form-control">
-              <option value=""></option>
-            <?php foreach ($local as $key) { ?>
+            <option value=""></option>
+            <?php foreach ($localSelect as $key) { ?>
                 <option value="<?=$key['idLocal']?>"><?=$key['local']?></option>
             <?php } ?>
           </select>
@@ -36,7 +37,7 @@
       <div class="form-group">
         <label for="categoria" class="col-xs-2 control-label">Categoria</label>
         <div class="col-xs-6 input-group">
-          <select name="categoria"></select>
+          <select name="categoria" id="categoria" class="form-control"></select>
         </div>
       </div>
       <div class="form-group">
@@ -46,7 +47,7 @@
       </div>
     </form>
     <hr>
-    <?php if (count($lista) > 0) { ?>
+    <?php if (count($lista['qtde']) > 0) { ?>
     <table class="table table-striped table-hover" id="tableRelTotal">
       <thead>
         <tr>
@@ -61,7 +62,7 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($lista as $key => $value) { ?>
+        <?php foreach ($lista['lista'] as $key => $value) { ?>
           <tr>
             <td><?=$value['dataCadastro']?></td>
             <td><?=$value['setor']?></td>
@@ -74,6 +75,13 @@
           </tr>
         <?php } ?>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="8" class="text-right">
+            <button class="btn btn-primary" type="button">Total: <span class="badge"><?=$lista['qtde']?></span></button>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   <?php }else{ ?>
     <div class="alert alert-warning alert-dismissible" role="alert">
@@ -94,17 +102,35 @@
     $('#local').change(function() {
         var idLocal = $(this).val();
         $.ajax({
-            url: '../controller/relatorio.php',
+            url: '../controller/relatorioAnalitico.php',
             type: 'POST',
             dataType: 'JSON',
             data: {action: 'getAllSetor', idLocal: idLocal},
         }).done(function(r) {
-          console.log(r);
             var option = '<option></option>';
             $.each(r, function(index, val) {
                 option += '<option value="'+val.idSetor+'">'+val.setor+'</option>';
             });
             $('#setor').html(option);
+            $('#categoria').html('<option></option>');
+        }).fail(function() {
+            console.log("error");
+        });
+    });
+
+    $('#setor').change(function() {
+        var idSetor = $(this).val();
+        $.ajax({
+            url: '../controller/relatorioAnalitico.php',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {action: 'getAllCategoria', idSetor: idSetor},
+        }).done(function(r) {
+            var option = '<option></option>';
+            $.each(r, function(index, val) {
+              option += '<option value="'+val.idCategoria+'">'+val.categoria+'</option>';
+            });
+            $('#categoria').html(option);
         }).fail(function() {
             console.log("error");
         });

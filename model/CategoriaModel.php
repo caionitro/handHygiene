@@ -115,6 +115,30 @@
         return $this->categorias;
       }
 
+      public function getCategoriaBySetor($idSetor){
+        $db = parent::getInstanceMysql();
+        $query = $db->prepare('SELECT sc.idSetorCategoria,
+                                  c.idCategoria, 
+                                  c.categoria, 
+                                  s.idSetor, 
+                                  s.setor,
+                                  l.idLocal,
+                                  l.local 
+                                FROM setor_categoria as sc
+                                  INNER JOIN categoria as c
+                                    ON c.idCategoria=sc.fk_categoria
+                                  INNER JOIN setor as s
+                                    ON s.idSetor=sc.fk_setor
+                                  INNER JOIN local as l
+                                    ON l.idLocal=sc.fk_local
+                                WHERE sc.fk_setor=:idSetor');
+        $query->bindValue(":idSetor",$idSetor,PDO::PARAM_INT);
+        $query->execute();
+        $this->categorias = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->categorias;
+      }
+
       public function getCategoriaById($idSetorCategoria){
         
         $db = parent::getInstanceMysql();
