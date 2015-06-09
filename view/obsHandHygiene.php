@@ -24,7 +24,7 @@
             <?php foreach ($listaIndicacao as $key) { ?>
               <div class="col-sm-2">
                 <div class="radio">
-                  <label><input type="radio" name="indicacao[]" value="<?=$key['idIndicacao']?>"><?=$key['descricao']?></label>
+                  <label><input type="radio" name="indicacao" value="<?=$key['idIndicacao']?>"><?=$key['descricao']?></label>
                 </div>
               </div>
             <?php } ?>
