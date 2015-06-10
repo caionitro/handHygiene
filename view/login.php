@@ -26,7 +26,7 @@
                     formLogin = $(this).serialize();
 
                 $.ajax({
-                    url: '../controller/usuario.php',
+                    url: '../controller/login.php',
                     type: 'POST',
                     dataType: 'JSON',
                     data: {action: 'login', campo: formLogin},

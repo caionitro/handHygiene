@@ -218,81 +218,87 @@
                                    c.categoria,
                                    i.descricao,
 
-                              (SELECT count(aob.fk_higienizacao) AS qtde
-                               FROM observacao AS ob
-                               INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
-                               INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
-                               INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
-                               WHERE aob.fk_higienizacao=1
+                                (SELECT count(aob.fk_higienizacao) AS qtde
+                                 FROM observacao AS ob
+                                 INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
+                                 INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
+                                 INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
+                                INNER JOIN acao_observacao as ao ON ao.fk_observacao=ob.idObservacao
+                                 WHERE aob.fk_higienizacao=1
                                  AND ob.fk_setor=o.fk_setor
                                  AND ob.fk_local=o.fk_local
                                  AND ob.fk_categoria=o.fk_categoria
-                                 AND 1=1 {$sqlOb}) AS 'palmas',
+                                 AND 1=1) AS 'palmas',
 
-                              (SELECT count(aob.fk_higienizacao) AS qtde
-                               FROM observacao AS ob
-                               INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
-                               INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
-                               INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
-                               WHERE aob.fk_higienizacao=2
+                                (SELECT count(aob.fk_higienizacao) AS qtde
+                                 FROM observacao AS ob
+                                 INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
+                                 INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
+                                 INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
+                              INNER JOIN acao_observacao as ao ON ao.fk_observacao=ob.idObservacao
+                                 WHERE aob.fk_higienizacao=2
                                  AND ob.fk_setor=o.fk_setor
                                  AND ob.fk_local=o.fk_local
                                  AND ob.fk_categoria=o.fk_categoria
-                                 AND 1=1 {$sqlOb}) AS 'interdigital',
+                                 AND 1=1) AS 'interdigital',
 
-                              (SELECT count(aob.fk_higienizacao) AS qtde
-                               FROM observacao AS ob
-                               INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
-                               INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
-                               INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
-                               WHERE aob.fk_higienizacao=3
+                                (SELECT count(aob.fk_higienizacao) AS qtde
+                                 FROM observacao AS ob
+                                 INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
+                                 INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
+                                 INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
+                              INNER JOIN acao_observacao as ao ON ao.fk_observacao=ob.idObservacao
+                                 WHERE aob.fk_higienizacao=3
                                  AND ob.fk_setor=o.fk_setor
                                  AND ob.fk_local=o.fk_local
                                  AND ob.fk_categoria=o.fk_categoria
-                                 AND 1=1 {$sqlOb}) AS 'dorso',
+                                 AND 1=1) AS 'dorso',
 
-                              (SELECT count(aob.fk_higienizacao) AS qtde
-                               FROM observacao AS ob
-                               INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
-                               INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
-                               INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
-                               WHERE aob.fk_higienizacao=4
+                                (SELECT count(aob.fk_higienizacao) AS qtde
+                                 FROM observacao AS ob
+                                 INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
+                                 INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
+                                 INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
+                              INNER JOIN acao_observacao as ao ON ao.fk_observacao=ob.idObservacao
+                                 WHERE aob.fk_higienizacao=4
                                  AND ob.fk_setor=o.fk_setor
                                  AND ob.fk_local=o.fk_local
                                  AND ob.fk_categoria=o.fk_categoria
-                                 AND 1=1 {$sqlOb}) AS 'polegar',
+                                 AND 1=1) AS 'polegar',
 
-                              (SELECT count(aob.fk_higienizacao) AS qtde
-                               FROM observacao AS ob
-                               INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
-                               INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
-                               INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
-                               WHERE aob.fk_higienizacao=5
+                                (SELECT count(aob.fk_higienizacao) AS qtde
+                                 FROM observacao AS ob
+                                 INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
+                                 INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
+                                 INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
+                              INNER JOIN acao_observacao as ao ON ao.fk_observacao=ob.idObservacao
+                                 WHERE aob.fk_higienizacao=5
                                  AND ob.fk_setor=o.fk_setor
                                  AND ob.fk_local=o.fk_local
                                  AND ob.fk_categoria=o.fk_categoria
-                                 AND 1=1 {$sqlOb}) AS 'ponta',
+                                 AND 1=1) AS 'ponta',
 
-                              (SELECT count(aob.fk_higienizacao) AS qtde
-                               FROM observacao AS ob
-                               INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
-                               INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
-                               INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
-                               WHERE aob.fk_higienizacao=6
+                                (SELECT count(aob.fk_higienizacao) AS qtde
+                                 FROM observacao AS ob
+                                 INNER JOIN higienizacao_observacao AS aob ON aob.fk_observacao=ob.idObservacao
+                                 INNER JOIN higienizacao AS ac ON ac.idHigienizacao=aob.fk_higienizacao
+                                 INNER JOIN categoria AS ca ON ca.idCategoria=ob.fk_categoria
+                              INNER JOIN acao_observacao as ao ON ao.fk_observacao=ob.idObservacao
+                                 WHERE aob.fk_higienizacao=6
                                  AND ob.fk_setor=o.fk_setor
                                  AND ob.fk_local=o.fk_local
                                  AND ob.fk_categoria=o.fk_categoria
-                                 AND 1=1 {$sqlOb}) AS 'punho'
-                            FROM observacao AS o
-                            INNER JOIN higienizacao_observacao AS ao ON ao.fk_observacao=o.idObservacao
-                            INNER JOIN higienizacao AS a ON a.idHigienizacao=ao.fk_higienizacao
-                            INNER JOIN indicacao_observacao AS oi ON oi.fk_observacao=o.idObservacao
-                            INNER JOIN indicacao AS i ON i.idIndicacao=oi.fk_indicacao
-                            INNER JOIN categoria AS c ON c.idCategoria=o.fk_categoria
-                            INNER JOIN local AS l ON l.idLocal=o.fk_local
-                            INNER JOIN setor AS s ON s.idSetor=o.fk_setor
-                            WHERE 1=1 {$sql}
-                            GROUP BY 1,2,3,4,5,6,7,8,9,10");
+                                 AND 1=1) AS 'punho'
+                              FROM observacao AS o
+                              INNER JOIN higienizacao_observacao AS ao ON ao.fk_observacao=o.idObservacao
+                              INNER JOIN higienizacao AS a ON a.idHigienizacao=ao.fk_higienizacao
+                              INNER JOIN indicacao_observacao AS oi ON oi.fk_observacao=o.idObservacao
+                              INNER JOIN indicacao AS i ON i.idIndicacao=oi.fk_indicacao
+                              INNER JOIN categoria AS c ON c.idCategoria=o.fk_categoria
+                              INNER JOIN local AS l ON l.idLocal=o.fk_local
+                              INNER JOIN setor AS s ON s.idSetor=o.fk_setor
+                              WHERE 1=1
+                              GROUP BY 1,2,3,4,5,6,7,8,9,10");
       $query->execute();
 
       $this->relatorio['lista'] = $query->fetchAll(PDO::FETCH_ASSOC);

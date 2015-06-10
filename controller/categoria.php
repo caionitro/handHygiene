@@ -1,9 +1,7 @@
 <?php
   require_once '../sessionUp.php';
   require_once '../connect/Connect.php';
-  require_once '../model/CategoriaModel.php';
-  require_once '../model/SetorModel.php';
-  require_once '../model/LocalModel.php';
+  require_once '../autoloadClass.php';
 
   $action             = (!empty($_REQUEST['action']))               ? $_REQUEST['action']               : '';
   $idSetorCategoria   = (!empty($_REQUEST['idSetorCategoria']))     ? $_REQUEST['idSetorCategoria']     : '';
@@ -13,11 +11,17 @@
 
 
   $categoria = new CategoriaModel();
+  unset($flashData);
 
   switch($action){
     case 'insert':
       //insere ou atualiza o usuário
-      if(!empty($idSetorCategoria)) $categoria->setId($idSetorCategoria);
+      if(!empty($idSetorCategoria)) {
+        $categoria->setId($idSetorCategoria);
+        Session::setFlashData('alert-info', 'Categoria alterada com sucesso!');
+      }else{
+        Session::setFlashData('alert-info', 'Categoria cadastrada com sucesso!');
+      }
       $categoria->setSetor($setor);
       $categoria->setLocal($local);
       $categoria->setCategoria($categoriaForm);
@@ -33,6 +37,7 @@
 
     case 'delete':
       $categoria->deleteCategoria($idSetorCategoria);
+      Session::setFlashData('alert-info', 'Categoria deletada com sucesso!');
     break;
 
     case 'getSetorSelect':
@@ -50,6 +55,7 @@
       //$setor = $categoria->getAllSetors();
       $lista = $categoria->getAllCategorias();
       $local = $categoria->getAllLocals();
+      $flashData = Session::getFlashData();
 
       include_once '../view/categoria.php';
       break;

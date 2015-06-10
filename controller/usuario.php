@@ -1,7 +1,7 @@
 <?php
-  //require_once '../sessionUp.php';
+  require_once '../sessionUp.php';
   require_once '../connect/Connect.php';
-  require_once '../model/UsuarioModel.php';
+  require_once '../autoloadClass.php';
 
   $action     = (!empty($_REQUEST['action']))     ? $_REQUEST['action']     : '';
   $idUsuario  = (!empty($_REQUEST['idUsuario']))  ? $_REQUEST['idUsuario']  : '';
@@ -12,11 +12,17 @@
   $campo      = (!empty($_REQUEST['campo']))      ? $_REQUEST['campo']      : '';
 
   $user = new UsuarioModel();
+  unset($flashData);
 
   switch($action){
     case 'insert':
       //insere ou atualiza o usuário
-      if(!empty($idUsuario)) $user->setId($idUsuario);
+      if(!empty($idUsuario)) {
+        $user->setId($idUsuario);
+        Session::setFlashData('alert-info', 'Usuário alterado com sucesso!');
+      }else{
+        Session::setFlashData('alert-info', 'Usuário cadastrado com sucesso!');
+      }
       $user->setNome($nome);
       $user->setEmail($email);
       $user->setLogin($login);
@@ -33,6 +39,7 @@
 
     case 'delete':
       $user->deleteUser($idUsuario);
+      Session::setFlashData('alert-info', 'Usuário deletado com sucesso!');
     break;
 
     case 'login':
@@ -49,6 +56,8 @@
     default:
       //entra no formulário
       $lista = $user->getAllUsers();
+      $flashData = Session::getFlashData();
+
       include_once '../view/usuario.php';
       break;
   }

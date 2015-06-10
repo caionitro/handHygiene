@@ -14,6 +14,17 @@
       </ol>
     </div>
   </div>
+  <?php
+    if(is_array($flashData)) {
+      echo "<div class='row'><div class='col-sm-6'>
+              <div class='alert {$flashData['alert-class']} alert-dismissible text-center' role='alert'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                {$flashData['text']}
+              </div>
+              </div>
+            </div>";
+    }
+  ?>
   <div class="row">
     <h3>Quem você irá observar?</h3>
     <?php if(count($listCategoriaSetor) > 0){ ?>

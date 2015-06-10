@@ -2,8 +2,16 @@
 <?php require_once '../template/menu.php'; ?>
 
 <div class="container">
+  <?php
+    if(is_array($flashData)) {
+      echo "<div class='alert {$flashData['alert-class']} alert-dismissible text-center' role='alert'>
+              <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+              {$flashData['text']}
+            </div>";
+    }
+  ?>
     <h3>Cadastro de categoria</h3>
-    <form class="form-horizontal" id="formCategoria" action="../controller/categoria.php">
+    <form class="form-horizontal" id="formCategoria" action="categoria.php" method="POST">
         <input type="hidden" id="action" name="action" value="insert">
         <div class="form-group">
           <label for="nome" class="col-xs-2 control-label">ID</label>

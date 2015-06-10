@@ -1,11 +1,7 @@
 <?php
   require_once '../sessionUp.php';
   require_once '../connect/Connect.php';
-  require_once '../model/UsuarioModel.php';
-  require_once '../model/LocalModel.php';
-  require_once '../model/SetorModel.php';
-  require_once '../model/CategoriaModel.php';
-  require_once '../model/ObservacaoModel.php';
+  require_once '../autoloadClass.php';
 
   $action     = (!empty($_REQUEST['action']))     ? $_REQUEST['action']     : '';
   $idLocalSetor  = (!empty($_REQUEST['idLocalSetor']))  ? $_REQUEST['idLocalSetor']  : '';
@@ -13,6 +9,7 @@
   $campo  = (!empty($_REQUEST['campo']))  ? $_REQUEST['campo']  : '';
 
   $obs = new ObservacaoModel();
+  unset($flashData);
 
   switch($action){
 
@@ -28,10 +25,9 @@
 
     case 'insert':
       $valores = array();
-      //echo '<pre>'.print_r($campo,1).'</pre>';
       parse_str($campo, $valores);
       extract($valores);
-      // echo '<pre>'.print_r($valores,1).'</pre>';
+
       //insere ou atualiza a observacao
       $obs->setLocalSetor((int)$idLocalSetor);
       $obs->setSetorCategoria((int)$idSetorCategoria);
@@ -39,14 +35,15 @@
       $obs->setAcao((array)$acao);
       $obs->setHigienizacao((array)$higienizacao);
       $obs->setVestimenta((array)$vestimenta);
-      // echo '<pre>'.print_r($obs,1).'</pre>';
-      // exit;
+
       $obs->saveObservacao();
+      Session::setFlashData('alert-info', 'Observação cadastrada com sucesso!');
     break;
 
     case 'obsCategoria':
       $localSetorNome = $obs->getLocalSetorById($idLocalSetor);
       $listCategoriaSetor = $obs->getAllCategoriaById($idLocalSetor);
+      $flashData = Session::getFlashData();
       include_once '../view/obsCategoria.php';
     break;
 
