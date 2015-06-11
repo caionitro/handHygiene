@@ -55,10 +55,10 @@
           <th>Setor</th>
           <th>Local</th>
           <th>Categoria</th>
-          <th>Ação</th>
           <th>Indicação</th>
-          <th>Vestimenta</th>
+          <th>Ação</th>
           <th>Higienização</th>
+          <th>Vestimenta</th>
         </tr>
       </thead>
       <tbody>
@@ -68,10 +68,10 @@
             <td><?=$value['setor']?></td>
             <td><?=$value['local']?></td>
             <td><?=$value['categoria']?></td>
-            <td><?=$value['acao']?></td>
             <td><?=$value['indicacao']?></td>
-            <td><?=$value['vestimenta']?></td>
+            <td><?=$value['acao']?></td>
             <td><?=$value['higienizacao']?></td>
+            <td><?=$value['vestimenta']?></td>
           </tr>
         <?php } ?>
       </tbody>
