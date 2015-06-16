@@ -2,8 +2,8 @@
 <?php require_once '../template/menu.php'; ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
 <div class="container">
-    <h3>Relatório Indicação x Ação</h3>
-    <form class="form-horizontal" method="POST" action="relatorioIndicaAcao.php">
+    <h3>Relatório Ação x Higienização</h3>
+    <form class="form-horizontal" method="POST" action="relatorioAcaoHigienizacao.php">
       <input type="hidden" name="action" value="gerar">
       <div class="form-group">
         <label for="dataInicio" class="col-xs-2 control-label">Data Inicio</label>
@@ -55,12 +55,12 @@
           <th>Local</th>
           <th>Categoria</th>
           <th>Descrição</th>
-          <th>Fricção com álcool</th>
-          <th>Água + sabonete</th>
-          <th>Água + PVPI</th>
-          <th>Água + clorexidina</th>
-          <th>Outro produto</th>
-          <th>Não realizada</th>
+          <th>Palmas (dir.+esq.)</th>
+          <th>Interdigial (dir.+esq.)</th>
+          <th>Dorso (dir.+esq.)</th>
+          <th>Polegar (dir.+esq.)</th>
+          <th>Ponta (dir.+esq.)</th>
+          <th>Punho (dir.+esq.)</th>
         </tr>
       </thead>
       <tbody>
@@ -70,12 +70,12 @@
             <td><?=$value['local']?></td>
             <td><?=$value['categoria']?></td>
             <td><?=$value['descricao']?></td>
-            <td><?=$value['alcool']?></td>
-            <td><?=$value['sabonete']?></td>
-            <td><?=$value['pvpi']?></td>
-            <td><?=$value['clorexidina']?></td>
-            <td><?=$value['outro']?></td>
-            <td><?=$value['naoRealizada']?></td>
+            <td><?=$value['palmas']?></td>
+            <td><?=$value['interdigital']?></td>
+            <td><?=$value['dorso']?></td>
+            <td><?=$value['polegar']?></td>
+            <td><?=$value['ponta']?></td>
+            <td><?=$value['punho']?></td>
           </tr>
         <?php } ?>
       </tbody>
@@ -106,7 +106,7 @@
     $('#local').change(function() {
         var idLocal = $(this).val();
         $.ajax({
-            url: '../controller/relatorioIndicaAcao.php',
+            url: '../controller/relatorioAcaoHigienizacao.php',
             type: 'POST',
             dataType: 'JSON',
             data: {action: 'getAllSetor', idLocal: idLocal},
@@ -125,7 +125,7 @@
     $('#setor').change(function() {
         var idSetor = $(this).val();
         $.ajax({
-            url: '../controller/relatorioIndicaAcao.php',
+            url: '../controller/relatorioAcaoHigienizacao.php',
             type: 'POST',
             dataType: 'JSON',
             data: {action: 'getAllCategoria', idSetor: idSetor},

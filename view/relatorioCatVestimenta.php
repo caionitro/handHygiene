@@ -2,8 +2,8 @@
 <?php require_once '../template/menu.php'; ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
 <div class="container">
-    <h3>Relatório Indicação x Ação</h3>
-    <form class="form-horizontal" method="POST" action="relatorioIndicaAcao.php">
+    <h3>Relatório Categoria x Vestimenta</h3>
+    <form class="form-horizontal" method="POST" action="relatorioCatVestimenta.php">
       <input type="hidden" name="action" value="gerar">
       <div class="form-group">
         <label for="dataInicio" class="col-xs-2 control-label">Data Inicio</label>
@@ -54,13 +54,11 @@
           <th>Setor</th>
           <th>Local</th>
           <th>Categoria</th>
-          <th>Descrição</th>
-          <th>Fricção com álcool</th>
-          <th>Água + sabonete</th>
-          <th>Água + PVPI</th>
-          <th>Água + clorexidina</th>
-          <th>Outro produto</th>
-          <th>Não realizada</th>
+          <th>Anéis/Aliança</th>
+          <th>Esmalte</th>
+          <th>Jaleco de manga longa</th>
+          <th>Relógio</th>
+          <th>Unhas artificiais</th>
         </tr>
       </thead>
       <tbody>
@@ -69,13 +67,11 @@
             <td><?=$value['setor']?></td>
             <td><?=$value['local']?></td>
             <td><?=$value['categoria']?></td>
-            <td><?=$value['descricao']?></td>
-            <td><?=$value['alcool']?></td>
-            <td><?=$value['sabonete']?></td>
-            <td><?=$value['pvpi']?></td>
-            <td><?=$value['clorexidina']?></td>
-            <td><?=$value['outro']?></td>
-            <td><?=$value['naoRealizada']?></td>
+            <td class="text-center"><?=$value['aneis']?></td>
+            <td class="text-center"><?=$value['esmalte']?></td>
+            <td class="text-center"><?=$value['jaleco']?></td>
+            <td class="text-center"><?=$value['relogio']?></td>
+            <td class="text-center"><?=$value['unhas']?></td>
           </tr>
         <?php } ?>
       </tbody>
@@ -106,7 +102,7 @@
     $('#local').change(function() {
         var idLocal = $(this).val();
         $.ajax({
-            url: '../controller/relatorioIndicaAcao.php',
+            url: '../controller/relatorioCatVestimenta.php',
             type: 'POST',
             dataType: 'JSON',
             data: {action: 'getAllSetor', idLocal: idLocal},
@@ -125,7 +121,7 @@
     $('#setor').change(function() {
         var idSetor = $(this).val();
         $.ajax({
-            url: '../controller/relatorioIndicaAcao.php',
+            url: '../controller/relatorioCatVestimenta.php',
             type: 'POST',
             dataType: 'JSON',
             data: {action: 'getAllCategoria', idSetor: idSetor},
