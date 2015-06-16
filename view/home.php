@@ -10,8 +10,8 @@
 <div class="container">
 
   <div class="starter-template">
-    <h1>Hands Hygiene starter page</h1>
-    <p class="lead">Lorem ipsum...</p>
+    <!-- <h1><?=SISTEMA?> </h1>
+    <p class="lead"></p> -->
   </div>
 
 </div><!-- /.container -->
