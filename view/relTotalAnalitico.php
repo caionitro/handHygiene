@@ -48,6 +48,8 @@
     </form>
     <hr>
     <?php if (count($lista['qtde']) > 0) { ?>
+    <button class="btn btn-success btn-sm" id="btnImpExcel"><span class="fa fa-file-excel-o"></span> Excel</button>
+    <?php ob_start(); ?>
     <table class="table table-striped table-hover" id="tableRelTotal">
       <thead>
         <tr>
@@ -73,7 +75,10 @@
             <td><?=$value['higienizacao']?></td>
             <td><?=$value['vestimenta']?></td>
           </tr>
-        <?php } ?>
+        <?php
+          }
+          $htmlExcel = ob_get_contents();
+        ?>
       </tbody>
       <tfoot>
         <tr>
@@ -83,7 +88,12 @@
         </tr>
       </tfoot>
     </table>
-  <?php }else{ ?>
+  <?php
+    $html = ob_get_contents();
+    ob_end_clean();
+    $htmlExcel .= '<tbody></table>';
+    echo $html;
+  }else{ ?>
     <div class="alert alert-warning alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <strong>Ops!</strong> Não há registros lançados, refine a sua busca.
@@ -91,12 +101,20 @@
   <?php } ?>
 </div>
 </div>
+<form action="../controller/relatorioExcel.php" method="POST" id="impExcel" target="blank">
+  <input type="hidden" name="action" value="excel">
+  <input type="hidden" name="html" value="<?php echo str_replace('"', '\'', $htmlExcel);?>">
+</form>
 <script type="text/javascript">
   $(document).ready(function() {
     $('.input-group.date').datepicker({
       format: "dd/mm/yyyy",
       language: "pt-BR",
       autoclose: true
+    });
+
+    $('#btnImpExcel').click(function(event) {
+      $('#impExcel').submit();
     });
 
     $('#local').change(function() {
