@@ -3,87 +3,91 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
 <div class="container">
     <h3>Relatório geral sintético</h3>
-    <form class="form-horizontal" method="POST" action="relatorioSintetico.php">
-      <input type="hidden" name="action" value="gerar">
-      <div class="form-group">
-        <label for="dataInicio" class="col-xs-2 control-label">Data Inicio</label>
-        <div class="col-xs-6 input-group date">
-          <input type="text" class="form-control" value="<?=$dataInicio?>" name="dataInicio" id="dataInicio" placeholder="Data Inicio"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+    <div class="row">
+      <form class="form-horizontal" method="POST" action="relatorioSintetico.php">
+        <input type="hidden" name="action" value="gerar">
+        <div class="form-group">
+          <label for="dataInicio" class="col-xs-2 control-label">Data Inicio</label>
+          <div class="col-xs-6 input-group date">
+            <input type="text" class="form-control" value="<?=$dataInicio?>" name="dataInicio" id="dataInicio" placeholder="Data Inicio"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="dataFim" class="col-xs-2 control-label">Data Fim</label>
-        <div class="col-xs-6 input-group date">
-          <input type="text" class="form-control" value="<?=$dataFim?>" id="dataFim" name="dataFim" placeholder="Data Fim"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        <div class="form-group">
+          <label for="dataFim" class="col-xs-2 control-label">Data Fim</label>
+          <div class="col-xs-6 input-group date">
+            <input type="text" class="form-control" value="<?=$dataFim?>" id="dataFim" name="dataFim" placeholder="Data Fim"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="local" class="col-xs-2 control-label">Local</label>
-        <div class="col-xs-6 input-group">
-          <select name="local" id="local" class="form-control">
-            <option value=""></option>
-            <?php foreach ($localSelect as $key) { ?>
-                <option value="<?=$key['idLocal']?>"><?=$key['local']?></option>
-            <?php } ?>
-          </select>
+        <div class="form-group">
+          <label for="local" class="col-xs-2 control-label">Local</label>
+          <div class="col-xs-6 input-group">
+            <select name="local" id="local" class="form-control">
+              <option value=""></option>
+              <?php foreach ($localSelect as $key) { ?>
+                  <option value="<?=$key['idLocal']?>"><?=$key['local']?></option>
+              <?php } ?>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="setor" class="col-xs-2 control-label">Setor</label>
-        <div class="col-xs-6 input-group">
-          <select name="setor" id="setor" class="form-control"></select>
+        <div class="form-group">
+          <label for="setor" class="col-xs-2 control-label">Setor</label>
+          <div class="col-xs-6 input-group">
+            <select name="setor" id="setor" class="form-control"></select>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="categoria" class="col-xs-2 control-label">Categoria</label>
-        <div class="col-xs-6 input-group">
-          <select name="categoria" id="categoria" class="form-control"></select>
+        <div class="form-group">
+          <label for="categoria" class="col-xs-2 control-label">Categoria</label>
+          <div class="col-xs-6 input-group">
+            <select name="categoria" id="categoria" class="form-control"></select>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-6 col-xs-2 text-right">
-          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-filter"></span></button>
+        <div class="form-group">
+          <div class="col-sm-offset-6 col-xs-2 text-right">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-filter"></span></button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
     <hr>
     <?php if (count($lista['qtde']) > 0) { ?>
-    <button class="btn btn-success btn-sm" id="btnImpExcel"><span class="fa fa-file-excel-o"></span> Excel</button>
-    <?php ob_start(); ?>
-    <table class="table table-striped table-hover" id="tableRelTotal">
-      <thead>
-        <tr>
-          <th>Setor</th>
-          <th>Local</th>
-          <th>Categoria</th>
-          <th>Quantidade</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($lista['lista'] as $key => $value) { ?>
+    <div class="row">
+      <div class="dropdown">
+        <button id="dLabel" type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <span class="fa fa-cog"></span> Ação
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+          <li><a id="btnImpExcel" href="#"><span class="fa fa-file-excel-o"></span> Excel</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <?php ob_start(); ?>
+      <table class="table table-striped table-hover" id="tableRelTotal">
+        <thead>
           <tr>
-            <td><?=$value['setor']?></td>
-            <td><?=$value['local']?></td>
-            <td><?=$value['categoria']?></td>
-            <td><?=$value['qtde']?></td>
+            <th>Setor</th>
+            <th>Local</th>
+            <th>Categoria</th>
+            <th>Quantidade</th>
           </tr>
-        <?php
-          }
-          $htmlExcel = ob_get_contents();
-        ?>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="8" class="text-right">
-            <button class="btn btn-primary" type="button">Total: <span class="badge"><?=$lista['qtde']?></span></button>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach ($lista['lista'] as $key => $value) { ?>
+            <tr>
+              <td><?=$value['setor']?></td>
+              <td><?=$value['local']?></td>
+              <td><?=$value['categoria']?></td>
+              <td><?=$value['qtde']?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+      <?php $htmlExcel = ob_get_contents(); ?>
+    </div>
   <?php
     $html = ob_get_contents();
     ob_end_clean();
-    $htmlExcel .= '<tbody></table>';
     echo $html;
   }else{ ?>
     <div class="alert alert-warning alert-dismissible" role="alert">
@@ -93,6 +97,8 @@
   <?php } ?>
 </div>
 </div>
+</br>
+</br>
 <form action="../controller/relatorioExcel.php" method="POST" id="impExcel" target="blank">
   <input type="hidden" name="action" value="excel">
   <input type="hidden" name="html" value="<?php echo str_replace('"', '\'', $htmlExcel);?>">

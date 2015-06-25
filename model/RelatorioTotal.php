@@ -7,6 +7,7 @@
     private $local;
     private $setor;
     private $categoria;
+    private $usuario;
 
 
     public function getAllLocal(){
@@ -142,6 +143,7 @@
       if(!empty($this->local)) $sql .= " AND o.fk_local='{$this->local}'";
       if(!empty($this->setor)) $sql .= " AND o.fk_setor='{$this->setor}'";
       if(!empty($this->categoria)) $sql .= " AND o.fk_categoria='{$this->categoria}'";
+      if(!empty($this->usuario)) $sql .= " AND u.idUsuario='{$this->usuario}'";
 
       $query = $db->prepare("SELECT  DATE_FORMAT(o.dataCadastro,'%d/%m/%y %h:%i %p') as dataCadastro,
                                       s.setor,
@@ -150,7 +152,8 @@
                                       IFNULL(a.descricao,'Não realizada') as acao,
                                       IFNULL(i.descricao,'Não realizada') as indicacao,
                                       IFNULL(v.descricao,'Não realizada') as vestimenta,
-                                      IFNULL(h.descricao,'Não realizada') as higienizacao
+                                      IFNULL(h.descricao,'Não realizada') as higienizacao,
+                                      u.nome as nome
                             FROM observacao as o
                               LEFT JOIN acao_observacao as ao
                                 ON ao.fk_observacao=o.idObservacao
@@ -174,6 +177,8 @@
                                 ON vo.fk_observacao=o.idObservacao
                               LEFT JOIN vestimenta as v
                                 ON v.idVestimenta=vo.fk_vestimenta
+                              INNER JOIN usuario as u
+                                ON u.idUsuario=o.userCadastro
                             WHERE 1=1 {$sql}");
       $query->execute();
 
@@ -389,6 +394,30 @@
     public function setSetor($setor)
     {
         $this->setor = $setor;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of usuario.
+     *
+     * @return mixed
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Sets the value of usuario.
+     *
+     * @param mixed $usuario the usuario
+     *
+     * @return self
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }

@@ -11,8 +11,10 @@
   $local     = (!empty($_REQUEST['local']))     ? $_REQUEST['local']     : '';
   $setor     = (!empty($_REQUEST['setor']))     ? $_REQUEST['setor']     : '';
   $categoria     = (!empty($_REQUEST['categoria']))     ? $_REQUEST['categoria']     : '';
+  $usuario     = (!empty($_REQUEST['usuario']))     ? $_REQUEST['usuario']     : '';
 
   $rel = new RelatorioTotal();
+  $user = new UsuarioModel();
 
   switch($action){
     case 'getAllSetor':
@@ -31,10 +33,12 @@
       if ($local) $rel->setLocal($local);
       if ($setor) $rel->setSetor($setor);
       if ($categoria) $rel->setCategoria($categoria);
+      if ($usuario) $rel->setUsuario($usuario);
 
       $lista = $rel->getListaGeralAnalitico();
 
     default:
+      $listaUsuario = $user->getAllUsers();
       $localSelect = $rel->getAllLocal();
       include_once '../view/relTotalAnalitico.php';
       break;
