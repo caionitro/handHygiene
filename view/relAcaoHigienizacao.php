@@ -71,7 +71,8 @@
             <th>Categoria</th>
             <th>Descrição</th>
             <th>Palmas (dir.+esq.)</th>
-            <th>Interdigial (dir.+esq.)</th>
+            <th>Palma+Interdigial (dir.+esq.)</th>
+            <th>Dedos entrelaçados</th>
             <th>Dorso (dir.+esq.)</th>
             <th>Polegar (dir.+esq.)</th>
             <th>Ponta (dir.+esq.)</th>
@@ -86,7 +87,8 @@
               <td><?=$value['categoria']?></td>
               <td><?=$value['descricao']?></td>
               <td><?=$value['palmas']?></td>
-              <td><?=$value['interdigital']?></td>
+              <td><?=$value['palmaInterdigital']?></td>
+              <td><?=$value['dedos']?></td>
               <td><?=$value['dorso']?></td>
               <td><?=$value['polegar']?></td>
               <td><?=$value['ponta']?></td>

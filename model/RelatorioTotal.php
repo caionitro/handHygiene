@@ -37,11 +37,17 @@
       $query = $db->prepare("SELECT b.local,
                               c.setor,
                               d.categoria,
-                              count(case when f.idVestimenta=1 then 1 else null end) as aneis,
-                              count(case when f.idVestimenta=2 then 1 else null end) as esmalte,
-                              count(case when f.idVestimenta=3 then 1 else null end) as jaleco,
-                              count(case when f.idVestimenta=4 then 1 else null end) as relogio,
-                              count(case when f.idVestimenta=5 then 1 else null end) as unhas
+                              count(case when f.idVestimenta=1 then 1 else null end) as jaleco,
+                              count(case when f.idVestimenta=2 then 1 else null end) as mascara,
+                              count(case when f.idVestimenta=3 then 1 else null end) as oculos,
+                              count(case when f.idVestimenta=4 then 1 else null end) as gorro,
+                              count(case when f.idVestimenta=5 then 1 else null end) as luvas,
+                              count(case when f.idVestimenta=6 then 1 else null end) as aneisAlianca,
+                              count(case when f.idVestimenta=7 then 1 else null end) as relogio,
+                              count(case when f.idVestimenta=8 then 1 else null end) as unhas,
+                              count(case when f.idVestimenta=9 then 1 else null end) as esmalte,
+                              count(case when f.idVestimenta=10 then 1 else null end) as brinco,
+                              count(case when f.idVestimenta=11 then 1 else null end) as piercing
                             FROM observacao AS a
                               INNER JOIN local AS b ON a.fk_local=b.idLocal
                               INNER JOIN setor AS c ON c.idSetor=a.fk_setor
@@ -230,11 +236,12 @@
                               d.categoria,
                               f.descricao,
                               count(case when h.idHigienizacao=1 then 1 else null end) as palmas,
-                              count(case when h.idHigienizacao=2 then 1 else null end) as interdigital,
-                              count(case when h.idHigienizacao=3 then 1 else null end) as dorso,
-                              count(case when h.idHigienizacao=4 then 1 else null end) as polegar,
-                              count(case when h.idHigienizacao=5 then 1 else null end) as ponta,
-                              count(case when h.idHigienizacao=6 then 1 else null end) as punho
+                              count(case when h.idHigienizacao=2 then 1 else null end) as palmaInterdigital,
+                              count(case when h.idHigienizacao=3 then 1 else null end) as dedos,
+                              count(case when h.idHigienizacao=4 then 1 else null end) as dorso,
+                              count(case when h.idHigienizacao=5 then 1 else null end) as polegar,
+                              count(case when h.idHigienizacao=6 then 1 else null end) as ponta,
+                              count(case when h.idHigienizacao=7 then 1 else null end) as punho
                             FROM observacao AS a
                               INNER JOIN local AS b ON a.fk_local=b.idLocal
                               INNER JOIN setor AS c ON c.idSetor=a.fk_setor

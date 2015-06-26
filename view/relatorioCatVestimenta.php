@@ -69,11 +69,17 @@
             <th>Setor</th>
             <th>Local</th>
             <th>Categoria</th>
+            <th>Jaleco</th>
+            <th>Máscara</th>
+            <th>Óculos</th>
+            <th>Gorro</th>
+            <th>Luvas</th>
             <th>Anéis/Aliança</th>
-            <th>Esmalte</th>
-            <th>Jaleco de manga longa</th>
             <th>Relógio</th>
-            <th>Unhas artificiais</th>
+            <th>Unhas</th>
+            <th>Esmalte</th>
+            <th>Brinco</th>
+            <th>Piercing</th>
           </tr>
         </thead>
         <tbody>
@@ -82,11 +88,17 @@
               <td><?=$value['setor']?></td>
               <td><?=$value['local']?></td>
               <td><?=$value['categoria']?></td>
-              <td class="text-center"><?=$value['aneis']?></td>
-              <td class="text-center"><?=$value['esmalte']?></td>
               <td class="text-center"><?=$value['jaleco']?></td>
+              <td class="text-center"><?=$value['mascara']?></td>
+              <td class="text-center"><?=$value['oculos']?></td>
+              <td class="text-center"><?=$value['gorro']?></td>
+              <td class="text-center"><?=$value['luvas']?></td>
+              <td class="text-center"><?=$value['aneisAlianca']?></td>
               <td class="text-center"><?=$value['relogio']?></td>
               <td class="text-center"><?=$value['unhas']?></td>
+              <td class="text-center"><?=$value['esmalte']?></td>
+              <td class="text-center"><?=$value['brinco']?></td>
+              <td class="text-center"><?=$value['piercing']?></td>
             </tr>
           <?php } ?>
         </tbody>

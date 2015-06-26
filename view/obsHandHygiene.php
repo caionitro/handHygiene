@@ -57,14 +57,22 @@
           <h3 class="panel-title">Técnica de higienização</h3>
         </div>
         <div class="panel-body">
+          <?php
+            $higiCount = 0;
+          ?>
           <div class="row col-sm-12">
-            <?php foreach ($listaHigienizacao as $key) { ?>
-              <div class="col-sm-2">
+            <?php
+              foreach ($listaHigienizacao as $key) {
+                $higiCol = ($higiCount>=5) ? 1 : 2;
+            ?>
+              <div class="col-sm-<?=$higiCol?>">
                 <div class="checkbox">
                   <label><input type="checkbox" name="higienizacao[]" value="<?=$key['idHigienizacao']?>"><?=$key['descricao']?></label>
                 </div>
               </div>
-            <?php } ?>
+            <?php
+            $higiCount++;
+            } ?>
           </div>
         </div>
       </div>
@@ -72,12 +80,12 @@
     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Vestimenta e adornos</h3>
+          <h3 class="panel-title">EPIs e Adornos</h3>
         </div>
         <div class="panel-body">
           <div class="row col-sm-12">
             <?php foreach ($listaVestimenta as $key) { ?>
-              <div class="col-sm-2">
+              <div class="col-sm-1">
                 <div class="checkbox">
                   <label><input type="checkbox" name="vestimenta[]" value="<?=$key['idVestimenta']?>"><?=$key['descricao']?></label>
                 </div>
