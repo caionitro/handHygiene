@@ -79,10 +79,10 @@
         <table class="table table-striped table-hover table-bordered" id="tableRelTotal">
           <thead>
             <tr>
-              <th width="10%">Data</th>
-              <th width="10%">Setor</th>
-              <th width="15%">Local</th>
-              <th width="15%">Categoria</th>
+              <th>Data</th>
+              <th>Setor</th>
+              <th>Local</th>
+              <th>Categoria</th>
               <th>Ant. pacte</th>
               <th>Ant. proc. assep.</th>
               <th>Ap. fluídos corp.</th>
@@ -112,7 +112,7 @@
               <th>Esmalte</th>
               <th>Brinco</th>
               <th>Piercing</th>
-              <th width="15%">Usuário</th>
+              <th>Usuário</th>
             </tr>
           </thead>
           <tbody>
