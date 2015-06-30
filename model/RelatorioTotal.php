@@ -194,6 +194,68 @@
       return $this->relatorio;
     }
 
+    public function getListaGeralAnaliX(){
+      $db = parent::getInstanceMysql();
+      unset($sql);
+      if(!empty($this->dataInicio)) $sql .= " AND o.dataCadastro>='{$this->dataInicio}'";
+      if(!empty($this->dataFim)) $sql .= " AND o.dataCadastro<='{$this->dataFim}'";
+      if(!empty($this->local)) $sql .= " AND o.fk_local='{$this->local}'";
+      if(!empty($this->setor)) $sql .= " AND o.fk_setor='{$this->setor}'";
+      if(!empty($this->categoria)) $sql .= " AND o.fk_categoria='{$this->categoria}'";
+      if(!empty($this->usuario)) $sql .= " AND u.idUsuario='{$this->usuario}'";
+
+      $query = $db->prepare("SELECT  DATE_FORMAT(o.dataCadastro,'%d/%m/%y %h:%i %p') as dataCadastro,
+                                    s.setor,
+                                    l.local,
+                                    c.categoria,
+                                  (select case when fk_indicacao=1  then 'X' else '' end as antPacte from indicacao_observacao where fk_observacao=o.idObservacao and fk_indicacao=1) as antpacte,
+                                  (select case when fk_indicacao=2  then 'X' else '' end as antProcAssep from indicacao_observacao where fk_observacao=o.idObservacao and fk_indicacao=2) as antProcAssep,
+                                  (select case when fk_indicacao=3  then 'X' else '' end as fluidoCorp from indicacao_observacao where fk_observacao=o.idObservacao and fk_indicacao=3) as fluidoCorp,
+                                  (select case when fk_indicacao=4  then 'X' else '' end as apPacte from indicacao_observacao where fk_observacao=o.idObservacao and fk_indicacao=4) as apPacte,
+                                  (select case when fk_indicacao=5  then 'X' else '' end as apProxim from indicacao_observacao where fk_observacao=o.idObservacao and fk_indicacao=5) as apProxim,
+                                  (select case when fk_acao=1  then 'X' else '' end as friccao from acao_observacao where fk_observacao=o.idObservacao and fk_acao=1) as friccao,
+                                  (select case when fk_acao=2  then 'X' else '' end as sabonete from acao_observacao where fk_observacao=o.idObservacao and fk_acao=2) as sabonete,
+                                  (select case when fk_acao=3  then 'X' else '' end as pvpi from acao_observacao where fk_observacao=o.idObservacao and fk_acao=3) as pvpi,
+                                  (select case when fk_acao=4  then 'X' else '' end as clorexidina from acao_observacao where fk_observacao=o.idObservacao and fk_acao=4) as clorexidina,
+                                  (select case when fk_acao=5  then 'X' else '' end as outro from acao_observacao where fk_observacao=o.idObservacao and fk_acao=5) as outro,
+                                  (select case when fk_acao=6  then 'X' else '' end as naoRealizada from acao_observacao where fk_observacao=o.idObservacao and fk_acao=6) as naoRealizada,
+                                  (select case when fk_higienizacao=1  then 'X' else '' end as palmas from higienizacao_observacao where fk_observacao=o.idObservacao and fk_higienizacao=1) as palmas,
+                                  (select case when fk_higienizacao=2  then 'X' else '' end as palmaInterdigital from higienizacao_observacao where fk_observacao=o.idObservacao and fk_higienizacao=2) as palmaInterdigital,
+                                  (select case when fk_higienizacao=3  then 'X' else '' end as dedos from higienizacao_observacao where fk_observacao=o.idObservacao and fk_higienizacao=3) as dedos,
+                                  (select case when fk_higienizacao=4  then 'X' else '' end as dorso from higienizacao_observacao where fk_observacao=o.idObservacao and fk_higienizacao=4) as dorso,
+                                  (select case when fk_higienizacao=5  then 'X' else '' end as polegar from higienizacao_observacao where fk_observacao=o.idObservacao and fk_higienizacao=5) as polegar,
+                                  (select case when fk_higienizacao=6  then 'X' else '' end as ponta from higienizacao_observacao where fk_observacao=o.idObservacao and fk_higienizacao=6) as ponta,
+                                  (select case when fk_higienizacao=7  then 'X' else '' end as punho from higienizacao_observacao where fk_observacao=o.idObservacao and fk_higienizacao=7) as punho,
+                                  (select case when fk_vestimenta=1  then 'X' else '' end as jaleco from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=1) as jaleco,
+                                  (select case when fk_vestimenta=2  then 'X' else '' end as mascara from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=2) as mascara,
+                                  (select case when fk_vestimenta=3  then 'X' else '' end as oculos from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=3) as oculos,
+                                  (select case when fk_vestimenta=4  then 'X' else '' end as gorro from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=4) as gorro,
+                                  (select case when fk_vestimenta=5  then 'X' else '' end as luvas from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=5) as luvas,
+                                  (select case when fk_vestimenta=6  then 'X' else '' end as anel from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=6) as anel,
+                                  (select case when fk_vestimenta=7  then 'X' else '' end as relogio from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=7) as relogio,
+                                  (select case when fk_vestimenta=8  then 'X' else '' end as unha from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=8) as unha,
+                                  (select case when fk_vestimenta=9  then 'X' else '' end as esmalte from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=9) as esmalte,
+                                  (select case when fk_vestimenta=10  then 'X' else '' end as brinco from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=10) as brinco,
+                                  (select case when fk_vestimenta=11  then 'X' else '' end as piercing from vestimenta_observacao where fk_observacao=o.idObservacao and fk_vestimenta=11) as piercing,
+                                    u.nome as nome
+                              FROM observacao as o
+                                INNER JOIN categoria as c
+                                ON c.idCategoria=o.fk_categoria
+                                INNER JOIN local as l
+                                ON l.idLocal=o.fk_local
+                                INNER JOIN setor as s
+                                ON s.idSetor=o.fk_setor
+                                INNER JOIN usuario as u
+                                ON u.idUsuario=o.userCadastro
+                              WHERE 1=1 {$sql}");
+      $query->execute();
+
+      $this->relatorio['lista'] = $query->fetchAll(PDO::FETCH_ASSOC);
+      $this->relatorio['qtde'] = $query->rowCount();
+
+      return $this->relatorio;
+    }
+
     public function getListaGeralSintetico(){
       $db = parent::getInstanceMysql();
       unset($sql);

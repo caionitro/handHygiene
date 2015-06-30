@@ -31,6 +31,8 @@
             <li class="divider"></li>
             <li><a href="../controller/relatorioAnalitico.php">Geral Analítico</a></li>
             <li><a href="../controller/relatorioSintetico.php">Geral Sintético</a></li>
+            <li class="divider"></li>
+            <li><a href="../controller/relatorioAnaliX.php">Geral Analítico em X</a></li>
           </ul>
         </li>
       </ul>
