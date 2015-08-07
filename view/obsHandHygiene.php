@@ -17,6 +17,18 @@
     <input type="hidden" name="idSetorCategoria" value="<?=$setorCategoria['idSetorCategoria']?>">
     <div class="row">
       <div class="panel panel-default">
+        <div class="panel-heading">Box</div>
+        <div class="panel-body">
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="box" name="box" placeholder="Box" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="panel panel-default">
         <div class="panel-heading">Indicação</div>
         <div class="panel-body">
 

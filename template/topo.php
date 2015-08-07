@@ -1,5 +1,5 @@
 <?php
-    define(SISTEMA, 'Hand Hygiene');
+    define('SISTEMA', 'Hand Hygiene');
     require_once '../sessionUp.php';
 ?>
 <!DOCTYPE html>

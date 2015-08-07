@@ -35,6 +35,7 @@
       $obs->setAcao((array)$acao);
       $obs->setHigienizacao((array)$higienizacao);
       $obs->setVestimenta((array)$vestimenta);
+      $obs->setBox((string)$box);
 
       $obs->saveObservacao();
       Session::setFlashData('alert-info', 'Observação cadastrada com sucesso!');

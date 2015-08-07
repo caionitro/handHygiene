@@ -5,6 +5,7 @@
       private $localSetor = [];
       private $setorCategoria = [];
       private $indicacao;
+      private $box;
       private $acao = [];
       private $higienizacao = [];
       private $vestimenta = [];
@@ -17,10 +18,11 @@
         $localSetorObs = $this->getLocalSetorById($this->localSetor);
         $setorCategoriaObs = $this->getSetorCategoriaById($this->setorCategoria);
 
-        $qObservacao = $db->prepare('INSERT INTO observacao (fk_local,fk_setor,fk_categoria,userCadastro) VALUES (:fk_local,:fk_setor,:fk_categoria,:userCadastro)');
+        $qObservacao = $db->prepare('INSERT INTO observacao (fk_local,fk_setor,fk_categoria,userCadastro,box) VALUES (:fk_local,:fk_setor,:fk_categoria,:userCadastro,:box)');
         $qObservacao->bindValue(":fk_local",$localSetorObs['idLocal'],PDO::PARAM_INT);
         $qObservacao->bindValue(":fk_setor",$setorCategoriaObs['idSetor'],PDO::PARAM_INT);
         $qObservacao->bindValue(":fk_categoria",$setorCategoriaObs['idCategoria'],PDO::PARAM_INT);
+        $qObservacao->bindValue(":box",$this->getBox(),PDO::PARAM_STR);
         $qObservacao->bindValue(":userCadastro",$_SESSION['user']['idUsuario'],PDO::PARAM_INT);
         $qObservacao->execute();
         $lastId = $db->lastInsertId();
@@ -319,5 +321,29 @@
     public function setSetorCategoria($setorCategoria)
     {
         $this->setorCategoria = $setorCategoria;
+    }
+
+    /**
+     * Gets the value of box.
+     *
+     * @return mixed
+     */
+    public function getBox()
+    {
+        return $this->box;
+    }
+
+    /**
+     * Sets the value of box.
+     *
+     * @param mixed $box the box
+     *
+     * @return self
+     */
+    public function setBox($box)
+    {
+        $this->box = $box;
+
+        return $this;
     }
 }
