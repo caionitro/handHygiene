@@ -40,7 +40,7 @@
 
       //   return true;
       // }
-
+      //Função para pegar idLocal, local e dataCadastro da tabela Local
       public function getAllLocals(){
 
         $db = parent::getInstanceMysql();
